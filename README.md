@@ -54,3 +54,4 @@ pnpm exec prisma migrate dev --name change-name
 
 Never commit `.env`. Use `.env.example` as the template. Production deployments must provide strong, independent JWT secrets, a managed PostgreSQL connection string, a restricted CORS origin, and payment-provider credentials before enabling live payment adapters.
 # steve-jr.
+# steve-jr.
