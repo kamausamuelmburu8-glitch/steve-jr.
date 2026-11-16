@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: stevejnr
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - stevejnr-postgres:/var/lib/postgresql/data
+
+  api:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/stevejnr?schema=public
+      PORT: 3000
+      FRONTEND_URL: http://localhost:3001
+      JWT_ACCESS_SECRET: change-this-access-secret
+      JWT_REFRESH_SECRET: change-this-refresh-secret
+    ports:
+      - "3000:3000"
+
+volumes:
+  stevejnr-postgres:

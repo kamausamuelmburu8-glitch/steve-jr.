@@ -1,0 +1,212 @@
+@baseUrl = http://localhost:3000/api/v1
+@token = paste-access-token-here
+@refreshToken = paste-refresh-token-here
+@productSlug = milano-velvet-sofa
+@orderNumber = SJNR-00000000
+
+### Health
+GET {{baseUrl}}/health
+
+### Home content
+GET {{baseUrl}}/home
+
+### Product listing with filters
+GET {{baseUrl}}/products?q=sofa&sort=featured&page=1&limit=12
+
+### Product detail
+GET {{baseUrl}}/products/{{productSlug}}
+
+### Categories
+GET {{baseUrl}}/categories
+
+### Blog, FAQs, services, projects
+GET {{baseUrl}}/blog/posts
+GET {{baseUrl}}/blog/posts/how-to-style-a-luxury-living-room-in-2026
+GET {{baseUrl}}/faqs
+GET {{baseUrl}}/services
+GET {{baseUrl}}/projects
+GET {{baseUrl}}/store/info
+
+### Contact
+POST {{baseUrl}}/contact/messages
+Content-Type: application/json
+
+{ "name": "John Doe", "email": "john@example.com", "phone": "+254700000000", "subject": "General Inquiry", "message": "I would like help choosing a sofa." }
+
+### Newsletter
+POST {{baseUrl}}/newsletter/subscribers
+Content-Type: application/json
+
+{ "email": "john@example.com" }
+
+### Register
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{ "name": "John Doe", "email": "john@example.com", "password": "StrongPassword123!", "phone": "+254700000000" }
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{ "email": "admin@stevejnr.com", "password": "replace-with-seed-admin-password" }
+
+### Refresh token
+POST {{baseUrl}}/auth/refresh
+Content-Type: application/json
+
+{ "refreshToken": "{{refreshToken}}" }
+
+### Current user
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{token}}
+
+### Update current profile
+PATCH {{baseUrl}}/auth/me
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "name": "Updated Name", "phone": "+254700000000" }
+
+### Change current password
+PATCH {{baseUrl}}/auth/me/password
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "currentPassword": "CurrentPassword123!", "newPassword": "NewPassword123!" }
+
+### Update current preferences
+PATCH {{baseUrl}}/auth/me/preferences
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "emailNotif": true, "smsNotif": false, "promoNotif": true, "language": "English", "currency": "KES" }
+
+### Logout
+POST {{baseUrl}}/auth/logout
+Authorization: Bearer {{token}}
+
+### Addresses
+GET {{baseUrl}}/addresses
+Authorization: Bearer {{token}}
+
+POST {{baseUrl}}/addresses
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "label": "Home", "name": "John Doe", "address": "Westlands Road", "city": "Nairobi", "country": "Kenya", "phone": "+254700000000", "isDefault": true }
+
+### Cart and wishlist
+GET {{baseUrl}}/cart
+Authorization: Bearer {{token}}
+
+POST {{baseUrl}}/cart/items
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "productId": "replace-with-product-id", "quantity": 1 }
+
+GET {{baseUrl}}/wishlist
+Authorization: Bearer {{token}}
+
+POST {{baseUrl}}/wishlist/items/replace-with-product-id
+Authorization: Bearer {{token}}
+
+### Validate coupon
+POST {{baseUrl}}/coupons/validate
+Content-Type: application/json
+
+{ "code": "WELCOME15", "subtotal": 1250 }
+
+GET {{baseUrl}}/coupons
+Authorization: Bearer {{token}}
+
+### Create order
+POST {{baseUrl}}/orders
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "items": [{ "productId": "replace-with-product-id", "quantity": 1 }], "shipping": { "firstName": "John", "lastName": "Doe", "email": "john@example.com", "phone": "+254700000000", "address": "Westlands Road", "city": "Nairobi", "country": "Kenya", "zip": "00100" }, "paymentMethod": "MPESA", "couponCode": "WELCOME15" }
+
+### Customer orders, invoices, tracking, notifications, support
+GET {{baseUrl}}/orders
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/orders/track/{{orderNumber}}
+
+GET {{baseUrl}}/invoices
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/notifications
+Authorization: Bearer {{token}}
+
+POST {{baseUrl}}/support/messages
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "text": "Please help me track my order." }
+
+### Assistant
+POST {{baseUrl}}/assistant/messages
+Content-Type: application/json
+
+{ "content": "Show me living room sofas" }
+
+### Admin dashboard
+GET {{baseUrl}}/admin/dashboard
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/analytics
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/sales
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/reports
+Authorization: Bearer {{token}}
+
+### Admin catalog and operations
+GET {{baseUrl}}/admin/products?q=sofa&page=1&limit=20
+Authorization: Bearer {{token}}
+
+POST {{baseUrl}}/admin/products
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "name": "Sample Console Table", "description": "A handcrafted console table.", "price": 899, "sku": "SAMPLE-CONSOLE-001", "brand": "Steve JNR Signature", "material": "Solid Oak", "category": "entryway", "stockCount": 10, "images": ["https://images.pexels.com/photos/667829/pexels-photo-667829.jpeg"], "features": ["Solid wood", "Hand finished"] }
+
+GET {{baseUrl}}/admin/inventory
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/orders
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/customers
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/reviews
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/promotions
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/employees
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/campaigns
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/tasks
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/calendar/events
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/activity
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/notifications
+Authorization: Bearer {{token}}
+
+GET {{baseUrl}}/admin/settings
+Authorization: Bearer {{token}}
